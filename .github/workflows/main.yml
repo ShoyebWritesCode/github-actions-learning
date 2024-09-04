@@ -48,9 +48,9 @@ jobs:
       with:
         server_address: smtp.your-email-provider.com
         server_port: 587
-        username: ${{ secrets.SMTP_USERNAME }}
+        username: mdsoyeb181811@gmail.com
         password: ${{ secrets.SMTP_PASSWORD }}
         subject: Pull Request Merged Successfully
         body: The pull request has been merged into the main branch successfully.
-        to: your-email@example.com
-        from: your-email@example.com
+        to: mdsoyeb@iut-dhaka.edu
+        from: mdsoyeb181811@gmail.com
