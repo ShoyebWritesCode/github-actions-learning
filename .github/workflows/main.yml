@@ -16,7 +16,7 @@ jobs:
 
     - name: Search for console.log
       run: |
-        if grep -rnw 'console.log' .; then
+        if grep -rnw 'console.log' ./src; then
           echo "console.log found, failing the build"
           exit 1
         else
