@@ -1,0 +1,56 @@
+name: Check for console.log
+
+# Triggers the workflow on pull requests to the main branch
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  check-console-log:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Search for console.log
+      run: |
+        if grep -rnw 'console.log' .; then
+          echo "console.log found, failing the build"
+          exit 1
+        else
+          echo "No console.log found, proceeding"
+        fi
+
+  auto-merge:
+    needs: check-console-log
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+    - name: Merge the PR
+      run: |
+        git config --global user.name 'github-actions[bot]'
+        git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+        git checkout main
+        git merge ${{ github.head_ref }}
+        git push origin main
+
+  notify:
+    needs: auto-merge
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+    - name: Send email notification
+      uses: dawidd6/action-send-mail@v3
+      with:
+        server_address: smtp.your-email-provider.com
+        server_port: 587
+        username: ${{ secrets.SMTP_USERNAME }}
+        password: ${{ secrets.SMTP_PASSWORD }}
+        subject: Pull Request Merged Successfully
+        body: The pull request has been merged into the main branch successfully.
+        to: your-email@example.com
+        from: your-email@example.com
