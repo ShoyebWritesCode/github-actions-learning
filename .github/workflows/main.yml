@@ -145,7 +145,7 @@ jobs:
       with:
         github-token: ${{ secrets.GH_TOKEN }}
         script: |
-         const imageUrl = 'https://github.com/${{ github.repository }}/raw/${{ github.ref }}/assets/image.jpg';
+         const imageUrl = 'https://i.pinimg.com/1200x/9e/c3/4b/9ec34b8199fee1d2434156632923d6ad.jpg;
          const { data: comment } = await github.rest.issues.createComment({
           owner: context.repo.owner,
           repo: context.repo.repo,
