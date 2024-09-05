@@ -51,8 +51,10 @@ jobs:
        git merge origin/${{ github.head_ref }} --no-ff -m "Merge pull request #${{ github.event.pull_request.number }} from ${{ github.head_ref }}"
 
     - name: Push changes to main
+      env:
+       GH_TOKEN: ${{ secrets.GH_TOKEN }}
       run: |
-       git push origin main
+       git push https://x-access-token:${GH_TOKEN}@github.com/ShoyebWritesCode/github-actions-learning.git main
 
   notify:
     needs: auto-merge
