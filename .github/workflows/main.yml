@@ -1,4 +1,4 @@
-name: Check for console.log
+name: Code Quality and Auto Merge
 
 # Triggers the workflow on pull requests to the main branch
 on:
@@ -7,8 +7,30 @@ on:
       - main
 
 jobs:
-  check-console-log:
+
+  check-camelcase:
     runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '14'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Check camelCase naming
+      run: node workflowScripts/check-camelcase.js
+
+    
+  check-console-log:
+    needs: check-camelcase
+    runs-on: ubuntu-latest
+    if: success()
 
     steps:
     - name: Checkout code
