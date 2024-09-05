@@ -24,9 +24,9 @@ jobs:
       - name: PHP Code Sniffer
         uses: php-actions/phpcs@v1
         with:
-          php_version: 8.1  # Specify PHP version
-          path: src/         # The directory to check
-          standard: PSR1 # Coding standard configuration (can be PSR12 or a custom file like phpcs.xml)
+          php_version: 8.1  
+          path: src/         
+          standard: PSR1 
           
   check-camelcase:
     needs: phpcs
