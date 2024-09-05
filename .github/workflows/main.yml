@@ -2,9 +2,13 @@ name: Check for console.log
 
 # Triggers the workflow on pull requests to the main branch
 on:
-  pull_request:
-    branches:
-      - main
+    push:
+     branches:
+      - test-branch   
+      - main          
+    pull_request:
+     branches:
+      - main          
 
 jobs:
   check-console-log:
