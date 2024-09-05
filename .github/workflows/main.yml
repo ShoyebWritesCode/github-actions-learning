@@ -48,6 +48,10 @@ jobs:
       run: |
        git checkout main
 
+    - name: List remote branches
+      run: |
+          git branch -r
+          
     - name: Merge the PR branch
       run: |
        git merge origin/${{ github.head_ref }} --no-ff -m "Merge pull request #${{ github.event.pull_request.number }} from ${{ github.head_ref }}"
