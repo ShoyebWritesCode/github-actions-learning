@@ -133,3 +133,18 @@ jobs:
         body: The pull request has been merged into the main branch successfully.
         to: mdsoyeb@iut-dhaka.edu
         from: mdsoyeb181811@gmail.com
+
+  post-pr-comment:
+    needs: notify
+    runs-on: ubuntu-latest
+    if: success()
+      
+    steps:
+    - name: Post comment on PR
+      uses: peter-evans/create-or-update-comment@v3
+      with:
+          token: ${{ secrets.GH_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            The workflow has completed successfully and the pull request has been merged into the main branch.
+    
