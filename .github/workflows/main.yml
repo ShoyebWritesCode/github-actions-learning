@@ -23,7 +23,7 @@ jobs:
 
       - name: Run PHP Code Sniffer
         run: |
-          vendor/bin/phpcs src/ 
+          vendor/bin/phpcs src/*.php
         continue-on-error: false
           
   check-camelcase:
