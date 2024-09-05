@@ -24,7 +24,9 @@ jobs:
         fi
   
   check-script-tags:
+    needs: check-console-log
     runs-on: ubuntu-latest
+    if: success()
       
     steps:
     - name: Checkout code
@@ -58,7 +60,7 @@ jobs:
         fi
 
   auto-merge:
-    needs: check-console-log
+    needs: check-script-tags
     runs-on: ubuntu-latest
     if: success()
 
