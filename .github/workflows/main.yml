@@ -20,13 +20,16 @@ jobs:
       - name: Composer install
         uses: php-actions/composer@v6
 
-      # Run PHP Code Sniffer
-      - name: PHP Code Sniffer
-        uses: php-actions/phpcs@v1
-        with:
-          php_version: 8.1  
-          path: src/         
-          standard: PSR1 
+
+      - name: Run PHP Code Sniffer
+        run: |
+          vendor/bin/phpcs src/ --standard=PSR1 --report=full
+        continue-on-error: false
+
+      # Display the output
+      - name: Display PHP Code Sniffer Report
+        run: |
+          vendor/bin/phpcs src/ --standard=PSR1 --report=full
           
   check-camelcase:
     needs: phpcs
