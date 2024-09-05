@@ -23,13 +23,8 @@ jobs:
 
       - name: Run PHP Code Sniffer
         run: |
-          vendor/bin/phpcs src/ --standard=PSR1 --report=full
+          vendor/bin/phpcs src/ 
         continue-on-error: false
-
-      # Display the output
-      - name: Display PHP Code Sniffer Report
-        run: |
-          vendor/bin/phpcs src/ --standard=PSR1 --report=full
           
   check-camelcase:
     needs: phpcs
