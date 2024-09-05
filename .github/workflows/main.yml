@@ -22,6 +22,40 @@ jobs:
         else
           echo "No console.log found, proceeding"
         fi
+  
+  check-script-tags:
+    runs-on: ubuntu-latest
+      
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Check for multiple script tags in HTML files
+      run: |
+        # Define the directory to search for HTML files
+        SEARCH_DIR="src"
+      
+        # Find all HTML files in the directory
+        HTML_FILES=$(find "$SEARCH_DIR" -type f -name '*.html')
+      
+        # Initialize flag to track if any file has more than one <script> tag
+        FAIL_BUILD=0
+      
+        # Loop through each HTML file and check for multiple <script> tags
+        for file in $HTML_FILES; do
+          SCRIPT_COUNT=$(grep -o '<script' "$file" | wc -l)
+            if [ "$SCRIPT_COUNT" -gt 1 ]; then
+              echo "Error: The file $file has more than one <script> tag."
+              FAIL_BUILD=1
+            fi
+              done
+      
+        # Fail the build if any file had more than one <script> tag
+        if [ "$FAIL_BUILD" -eq 1 ]; then
+          exit 1
+        else
+           echo "All HTML files have one or no <script> tags."
+        fi
 
   auto-merge:
     needs: check-console-log
