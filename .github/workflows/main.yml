@@ -24,7 +24,7 @@ jobs:
       run: npm install
 
     - name: Check camelCase naming
-      run: node check-camelcase.js
+      run: node workflowScripts/check-camelcase.js
 
     
   check-console-log:
