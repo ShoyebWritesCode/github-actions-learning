@@ -8,8 +8,30 @@ on:
 
 jobs:
 
-  check-camelcase:
+
+  phpcs:
     runs-on: ubuntu-latest
+
+    steps:
+      # Check out the repository
+      - uses: actions/checkout@v3
+
+      # Install Composer dependencies
+      - name: Composer install
+        uses: php-actions/composer@v6
+
+      # Run PHP Code Sniffer
+      - name: PHP Code Sniffer
+        uses: php-actions/phpcs@v1
+        with:
+          php_version: 8.1  # Specify PHP version
+          path: src/         # The directory to check
+          standard: phpcs.xml # Coding standard configuration (can be PSR12 or a custom file like phpcs.xml)
+          
+  check-camelcase:
+    needs: phpcs
+    runs-on: ubuntu-latest
+    if: success()
 
     steps:
     - name: Checkout code
