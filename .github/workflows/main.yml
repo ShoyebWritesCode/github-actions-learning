@@ -48,10 +48,6 @@ jobs:
       run: |
        git checkout main
 
-    - name: List remote branches
-      run: |
-          git branch -r
-          
     - name: Merge the PR branch
       run: |
        git merge origin/${{ github.head_ref }} --no-ff -m "Merge pull request #${{ github.event.pull_request.number }} from ${{ github.head_ref }}"
@@ -71,7 +67,7 @@ jobs:
     - name: Send email notification
       uses: dawidd6/action-send-mail@v3
       with:
-        server_address: smtp.your-email-provider.com
+        server_address: smtp.gmail.com
         server_port: 587
         username: mdsoyeb181811@gmail.com
         password: ${{ secrets.SMTP_PASSWORD }}
