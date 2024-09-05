@@ -145,11 +145,26 @@ jobs:
       with:
         github-token: ${{ secrets.GH_TOKEN }}
         script: |
-         const imageUrl = `https://github.com/ShoyebWritesCode/github-actions-learning/blob/main/assets/image.jpg`;
-         const { data: comment } = await github.rest.issues.createComment({
-          owner: context.repo.owner,
-          repo: context.repo.repo,
-          issue_number: context.issue.number,
-          body: `The workflow has completed successfully and the pull request has been merged into the main branch.\n\n${imageUrl}`
-         });
-    
+          const celebrationGifs = [
+            'https://c.tenor.com/ZCq4SwgCfxAAAAAC/snoopy-peanuts.gif',
+            'https://c.tenor.com/Z0ojZS2kpO0AAAAC/milk-and-mocha-happy.gif',
+            'https://c.tenor.com/LffD4a8ET9AAAAAC/heart-celebrate.gif',
+            'https://c.tenor.com/HJ0iSKwIG28AAAAC/yes-baby.gif',
+            'https://c.tenor.com/4blWuIh5MIYAAAAC/baby-yoda.gif',
+            'https://c.tenor.com/B_zYdea4l-4AAAAC/yay-minions.gif',
+            'https://media1.giphy.com/media/artj92V8o75VPL7AeQ/giphy.gif',
+            'https://media2.giphy.com/media/IwAZ6dvvvaTtdI8SD5/giphy.gif',
+            'https://media0.giphy.com/media/z8gtBVdZVrH20/giphy.gif',
+            'https://media2.giphy.com/media/26gN16cJ6gy4LzZSw/giphy.gif',
+            'https://media1.giphy.com/media/LZElUsjl1Bu6c/giphy.gif',
+            'https://media1.giphy.com/media/gHnwTttExPf4nwOWm7/giphy.gif',
+          ]
+          const getRandomGif = () => celebrationGifs[Math.floor(Math.random() * celebrationGifs.length)];
+          const gif = `![celebration gif](${getRandomGif()})`;
+          const { data: comment } = await github.rest.issues.createComment({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            issue_number: context.issue.number,
+            body: `The workflow has completed successfully and the pull request has been merged into the main branch.\n\n${gif}`
+          });
+      
