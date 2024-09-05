@@ -146,11 +146,10 @@ jobs:
         github-token: ${{ secrets.GH_TOKEN }}
         script: |
          const imageUrl = 'https://github.com/ShoyebWritesCode/github-actions-learning/blob/main/assets/image.jpg';
-         const commentBody = `The workflow has completed successfully and the pull request has been merged into the main branch.<br><br><img src="${imageUrl}" alt="Workflow Image" width="600"/>`;
-         await github.rest.issues.createComment({
-          issue_number: ${{ github.event.pull_request.number }},
-          owner: '${{ github.repository_owner }}',
-          repo: '${{ github.repository }}',
-          body: commentBody,
+         const { data: comment } = await github.rest.issues.createComment({
+          owner: context.repo.owner,
+          repo: context.repo.repo,
+          issue_number: context.issue.number,
+          body: `The workflow has completed successfully and the pull request has been merged into the main branch.<br><br><img src="${imageUrl}" alt="Workflow Image" width="600"/>`
          });
     
