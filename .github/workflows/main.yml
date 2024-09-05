@@ -26,7 +26,7 @@ jobs:
         with:
           php_version: 8.1  # Specify PHP version
           path: src/         # The directory to check
-          standard: phpcs.xml # Coding standard configuration (can be PSR12 or a custom file like phpcs.xml)
+          standard: PSR1 # Coding standard configuration (can be PSR12 or a custom file like phpcs.xml)
           
   check-camelcase:
     needs: phpcs
