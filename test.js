@@ -6,3 +6,4 @@ function fibonacci(n) {
 }
 
 
+alert(fibonacci(10));
