@@ -12,3 +12,5 @@
  */
 
 echo "Hello, World!";
+
+die("test");
